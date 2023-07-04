@@ -23,3 +23,8 @@ COPY initialize.sql /workspace/initialize.sql
 
 RUN mariadb < /workspace/initialize.sql && \
     rm /workspace/initialize.sql
+
+RUN cd /workspace && \
+    git clone https://github.com/DMOJ/site.git && cd site && \ 
+    git checkout v4.0.0 && git submodule init && git submodile update && \
+    
