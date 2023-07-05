@@ -23,6 +23,10 @@ DEBUG = True  # Change to False once you are done with runserver testing.
 INSTALLED_APPS += (
 )
 
+# URL Prefix!
+FORCE_SCRIPT_NAME = '/dmoj' 
+STATIC_URL = f'{FORCE_SCRIPT_NAME}/static/'
+
 # Caching. You can use memcached or redis instead.
 # Documentation: <https://docs.djangoproject.com/en/3.2/topics/cache/>
 CACHES = {
