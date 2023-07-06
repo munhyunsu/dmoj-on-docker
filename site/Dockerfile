@@ -11,6 +11,10 @@ LABEL \
     org.label-schema.schema-version="1.0" \
     org.label-schema.vendor="DNLab"
 
+RUN rm /etc/localtime && \
+    ln -s /usr/share/zoneinfo/${TZ} /etc/localtime && \
+    echo ${TZ} > /etc/timezone
+
 RUN apt update && apt -y upgrade && apt -y dist-upgrade && \
     apt install -y git gcc g++ make pkg-config wget python3-dev python3-pip python3-venv libxml2-dev libxslt1-dev zlib1g-dev gettext curl redis-server nodejs mariadb-server mariadb-client libmariadb-dev supervisor nginx
 
@@ -22,11 +26,13 @@ COPY initialize.sql /workspace/initialize.sql
 
 RUN --mount=type=bind,source=initialize.sql,target=/workspace/initialize.sql \
     service mariadb start && \
+    mariadb-tzinfo-to-sql /usr/share/zoneinfo | mariadb -u root mysql && \
     mariadb < /workspace/initialize.sql
 
 RUN cd /workspace && \
     python3 -m venv venv_site && \
-    git clone https://github.com/DMOJ/site.git && cd site && \ 
+#    git clone https://github.com/DMOJ/site.git && cd site && \ 
+    git clone https://github.com/munhyunsu/dmoj-online-judge.git site && cd site && \ 
     git checkout v4.0.0 && git submodule init && git submodule update && \
     /workspace/venv_site/bin/pip3 install --upgrade pip wheel && \
     /workspace/venv_site/bin/pip3 install --upgrade -r requirements.txt && \
