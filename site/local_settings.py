@@ -23,10 +23,6 @@ DEBUG = True  # Change to False once you are done with runserver testing.
 INSTALLED_APPS += (
 )
 
-# URL Prefix!
-FORCE_SCRIPT_NAME = '/dmoj' 
-STATIC_URL = f'{FORCE_SCRIPT_NAME}/static/'
-
 # Caching. You can use memcached or redis instead.
 # Documentation: <https://docs.djangoproject.com/en/3.2/topics/cache/>
 CACHES = {
@@ -129,7 +125,7 @@ SERVER_EMAIL = 'DMOJ: Modern Online Judge <errors@dmoj.ca>'
 STATIC_ROOT = '/tmp/static'
 
 # URL to access static files.
-#STATIC_URL = '/static/'
+STATIC_URL = '/static/'
 
 # Uncomment to use hashed filenames with the cache framework.
 #STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
@@ -332,3 +328,10 @@ LOGGING = {
 ## ======== Custom Configuration ========
 # You may add whatever Django configuration you would like here.
 # Do try to keep it separate so you can quickly patch in new settings.
+
+# URL Prefix!
+FORCE_SCRIPT_NAME = '/dmoj' 
+STATIC_URL = f'{FORCE_SCRIPT_NAME}/static/' # Override above setting
+
+# Whether to allow users to view source code: 'all' | 'all-solved' | 'only-own'
+DMOJ_SUBMISSION_SOURCE_VISIBILITY = 'only-own'
