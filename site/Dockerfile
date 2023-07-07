@@ -57,6 +57,7 @@ COPY uwsgi.ini /workspace/site/uwsgi.ini
 COPY site.conf /etc/supervisor/conf.d/site.conf
 COPY bridged.conf /etc/supervisor/conf.d/bridged.conf
 COPY celery.conf /etc/supervisor/conf.d/celery.conf
+COPY wsevent.conf /etc/supervisor/conf.d/wsevent.conf
 COPY config.js /workspace/site/websocket/config.js
 COPY nginx.conf /etc/nginx/sites-available/dmojsite
 
