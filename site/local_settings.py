@@ -1,3 +1,17 @@
+## ======== Custom Configuration ========
+# You may add whatever Django configuration you would like here.
+# Do try to keep it separate so you can quickly patch in new settings.
+
+# URL Prefix!
+DOMAIN = '127.0.0.1'
+FORCE_SCRIPT_NAME = ''
+
+# Whether to allow users to view source code: 'all' | 'all-solved' | 'only-own'
+DMOJ_SUBMISSION_SOURCE_VISIBILITY = 'only-own'
+
+# Problem root
+DMOJ_PROBLEM_DATA_ROOT = '/problems'
+
 #####################################
 ########## Django settings ##########
 #####################################
@@ -53,7 +67,7 @@ DATABASES = {
 
 # Internationalization.
 # Documentation: <https://docs.djangoproject.com/en/3.2/topics/i18n/>
-LANGUAGE_CODE = 'en-US'
+LANGUAGE_CODE = 'ko'
 DEFAULT_USER_TIME_ZONE = 'Asia/Seoul'
 USE_I18N = True
 USE_L10N = True
@@ -125,7 +139,7 @@ SERVER_EMAIL = 'DMOJ: Modern Online Judge <errors@dmoj.ca>'
 STATIC_ROOT = '/tmp/static'
 
 # URL to access static files.
-STATIC_URL = '/static/'
+STATIC_URL = f'{FORCE_SCRIPT_NAME}/static/'
 
 # Uncomment to use hashed filenames with the cache framework.
 #STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
@@ -181,11 +195,12 @@ EVENT_DAEMON_POST = 'ws://127.0.0.1:15101/'
 
 # Using our standard nginx configuration, these should be:
 #EVENT_DAEMON_GET = 'ws://<your domain>/event/'
-EVENT_DAEMON_GET = 'ws://127.0.0.1/event/'
+#EVENT_DAEMON_GET = 'ws://127.0.0.1/event/'
+EVENT_DAEMON_GET = f'wss://{DOMAIN}{FORCE_SCRIPT_NAME}/event/'
 #EVENT_DAEMON_GET_SSL = 'wss://<your domain>/event/'  # Optional
-EVENT_DAEMON_GET_SSL = 'wss://127.0.0.1/event/'  # Optional
+EVENT_DAEMON_GET_SSL = f'wss://{DOMAIN}{FORCE_SCRIPT_NAME}/event/'  # Optional
 #EVENT_DAEMON_POLL = '/channels/'
-EVENT_DAEMON_POLL = '/channels/'
+EVENT_DAEMON_POLL = f'{FORCE_SCRIPT_NAME}/channels/'
 
 # If you would like to use the AMQP-based event server from <https://github.com/DMOJ/event-server>,
 # uncomment this section instead. This is more involved, and recommended to be done
@@ -328,10 +343,3 @@ LOGGING = {
 ## ======== Custom Configuration ========
 # You may add whatever Django configuration you would like here.
 # Do try to keep it separate so you can quickly patch in new settings.
-
-# URL Prefix!
-FORCE_SCRIPT_NAME = '/dmoj' 
-STATIC_URL = f'{FORCE_SCRIPT_NAME}/static/' # Override above setting
-
-# Whether to allow users to view source code: 'all' | 'all-solved' | 'only-own'
-DMOJ_SUBMISSION_SOURCE_VISIBILITY = 'only-own'
