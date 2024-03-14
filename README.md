@@ -7,6 +7,11 @@ cd site
 docker build -t dmoj-site .
 ```
 
+```bash
+cd all
+docker build -t local/dmoj-all .
+```
+
 # Running examples
 
 - Run site
