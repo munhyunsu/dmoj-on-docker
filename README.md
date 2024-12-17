@@ -29,3 +29,4 @@ docker run --detach --restart unless-stopped --name judge1 dmoj --volume PROBLEM
 ## Ref
 
 - [mariadb-tzinfo-to-sql](https://mariadb.com/kb/en/mariadb-tzinfo-to-sql/)
+- [DMOJ docker](https://github.com/Ninjaclasher/dmoj-docker)
